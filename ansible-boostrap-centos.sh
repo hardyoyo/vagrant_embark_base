@@ -43,12 +43,6 @@ if [ "$(gem search -i librarian-ansible)" = "false" ]; then
   echo "Installing librarian-ansible..."
   gem install --no-ri --no-rdoc librarian-ansible >/dev/null
   echo "librarian-ansible installed!"
-
-# TODO: the following won't work in the same script on CentOS, you'll need to move it to a new provisioner
-
-  echo "Installing third-party Ansible roles (via librarian-ansible)..."
-  cd /vagrant && sudo -u vagrant /usr/local/bin/librarian-ansible install --clean
-else
-  echo "Updating third-party Ansible roles (via librarian-ansible)..."
-  cd /vagrant && sudo -u vagrant /usr/local/bin/librarian-ansible update
 fi
+
+exit 0

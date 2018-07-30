@@ -127,6 +127,9 @@ Vagrant.configure("2") do |config|
     # run ansible bootstrap
     config.vm.provision :shell, :name => "running ansible-bootstrap", :path => "ansible-boostrap-centos.sh"
 
+    # now run the install for Ansible Librarian
+    config.vm.provision :shell, :name => "running ansible-librarian-install.sh", :path => "ansible-librarian-install.sh"
+
     # # provision with ansible_local
     # config.vm.provision "ansible_local" do |ansible|
     #   ansible.playbook          = "playbook.yml"
@@ -145,21 +148,21 @@ Vagrant.configure("2") do |config|
 
 
     # housekeeping
-    config.vm.hostname = "spotlight"
+    config.vm.hostname = "embark"
     config.vm.network :private_network, ip: "192.168.33.33"
 
     # Set the name of the VM. See: http://stackoverflow.com/a/17864388/100134
-    config.vm.define :spotlight do |spotlight|
+    config.vm.define :embark do |embark|
     end
 
     # if we're running with vagrant-notify, send a notification that we're done, in case we've wandered off
     # https://github.com/fgrehm/vagrant-notify
     # NOTE: Currently this plugin only works on Linux or OSX hosts
     if Vagrant.has_plugin?('vagrant-notify')
-        config.vm.provision :shell, :inline => "notify-send --urgency=critical -t 20000 'Vagrant-Ansible-Spotlight is up! Get back to work! :-)'", run: "always"
+        config.vm.provision :shell, :inline => "notify-send --urgency=critical -t 20000 'Vagrant-Ansible-Embark is up! Get back to work! :-)'", run: "always"
     end
 
     # Message to display to user after 'vagrant up' completes
-    config.vm.post_up_message = "Setup of 'vagrant-ansible-spotlight' is now COMPLETE!\nYou can SSH into the new VM via 'vagrant ssh'"
+    config.vm.post_up_message = "Setup of 'vagrant-ansible-embark' is now COMPLETE!\nYou can SSH into the new VM via 'vagrant ssh'"
 
 end
