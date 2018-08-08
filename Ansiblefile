@@ -1,20 +1,17 @@
 #!/usr/bin/env ruby
 #^syntax detection
 
-#role "tulibraries.ansible-rails_app",
-#      git: "git@github.com:tulibraries/ansible-rails_app"
+role "uclalibrary.uclalib_role_epel",
+      git: "git@github.com:UCLALibrary/uclalib_role_epel"
 
-role "geerlingguy.apache",
-      git: "git@github.com:geerlingguy/ansible-role-apache"
+role "uclalibrary.uclalib_role_java",
+      git: "git@github.com:UCLALibrary/uclalib_role_java"
 
-#role "tulibraries.ansible_passenger-apache",
-#      git: "git@github.com:tulibraries/ansible_passenger-apache"
+role "uclalibrary.uclalib_role_apache",
+      git: "git@github.com:UCLALibrary/uclalib_role_apache"
 
-role "zzet.rbenv",
-      git: "git@github.com:zzet/ansible-rbenv-role"
-
-role "geerlingguy.solr",
-      git: "git@github.com:geerlingguy/ansible-role-solr"
+role "uclalibrary.uclalib_role_solr7",
+      git: "git@github.com:UCLALibrary/uclalib_role_solr7"
 
 # more roles can be added here, you can pull them from GitHub or from Ansible Galaxy
 # docs here: https://github.com/bcoe/librarian-ansible
