@@ -1,17 +1,101 @@
 #!/usr/bin/env ruby
 #^syntax detection
 
-role "uclalibrary.uclalib_role_epel",
+role "ansible-packages",
+      git: "git@github.com:archf/ansible-packages.git"
+
+role "uclalib_role_mysql",
+      git: "git@github.com:hardyoyo/uclalib_role_mysql", ref: "origin/use-relative-path-for-include-vars"
+
+role "uclalib_role_epel",
       git: "git@github.com:UCLALibrary/uclalib_role_epel"
 
-role "uclalibrary.uclalib_role_java",
+role "uclalib_role_samvera_basepackages",
+      git: "git@github.com:UCLALibrary/uclalib_role_samvera_basepackages"
+
+role "uclalib_role_java",
       git: "git@github.com:UCLALibrary/uclalib_role_java"
 
-role "uclalibrary.uclalib_role_apache",
+role "uclalib_role_clamav",
+      git: "git@github.com:UCLALibrary/uclalib_role_clamav"
+
+role "uclalib_role_pip",
+      git: "git@github.com:UCLALibrary/uclalib_role_pip"
+
+role "uclalib_role_imagemagick",
+      git: "git@github.com:UCLALibrary/uclalib_role_imagemagick"
+
+role "uclalib_role_libreoffice",
+      git: "git@github.com:UCLALibrary/uclalib_role_libreoffice"
+
+role "uclalib_role_ffmpeg",
+      git: "git@github.com:UCLALibrary/uclalib_role_ffmpeg"
+
+role "uclalib_role_fits",
+      git: "git@github.com:UCLALibrary/uclalib_role_fits"
+
+role "uclalib_role_ruby",
+      git: "git@github.com:UCLALibrary/uclalib_role_ruby"
+
+role "uclalib_role_apache",
       git: "git@github.com:UCLALibrary/uclalib_role_apache"
 
-role "uclalibrary.uclalib_role_solr7",
+role "uclalib_role_passenger",
+      git: "git@github.com:UCLALibrary/uclalib_role_passenger"
+
+role "uclalib_role_nodejs",
+      git: "git@github.com:UCLALibrary/uclalib_role_nodejs"
+
+role "uclalib_role_yarn",
+      git: "git@github.com:UCLALibrary/uclalib_role_yarn"
+
+role "uclalib_role_redis",
+      git: "git@github.com:UCLALibrary/uclalib_role_redis"
+
+role "uclalib_role_solr7",
       git: "git@github.com:UCLALibrary/uclalib_role_solr7"
+
+role "uclalib_role_tomcat",
+      git: "git@github.com:UCLALibrary/uclalib_role_tomcat"
+
+role "uclalib_role_fedora4",
+      git: "git@github.com:hardyoyo/uclalib_role_fedora4", ref: "origin/use-relative-path-for-include-vars"
+
+role "uclalib_role_clamav",
+      git: "git@github.com:UCLALibrary/uclalib_role_clamav"
+
+role "uclalib_role_pip",
+      git: "git@github.com:UCLALibrary/uclalib_role_pip"
+
+role "uclalib_role_imagemagick",
+      git: "git@github.com:UCLALibrary/uclalib_role_imagemagick"
+
+role "uclalib_role_libreoffice",
+      git: "git@github.com:UCLALibrary/uclalib_role_libreoffice"
+
+role "uclalib_role_ffmpeg",
+      git: "git@github.com:UCLALibrary/uclalib_role_ffmpeg"
+
+role "uclalib_role_fits",
+      git: "git@github.com:UCLALibrary/uclalib_role_fits"
+
+role "uclalib_role_ruby",
+      git: "git@github.com:UCLALibrary/uclalib_role_ruby"
+
+role "uclalib_role_passenger",
+      git: "git@github.com:UCLALibrary/uclalib_role_passenger"
+
+role "uclalib_role_nodejs",
+      git: "git@github.com:UCLALibrary/uclalib_role_nodejs"
+
+role "uclalib_role_yarn",
+      git: "git@github.com:UCLALibrary/uclalib_role_yarn"
+
+role "uclalib_role_redis",
+      git: "git@github.com:UCLALibrary/uclalib_role_redis"
+
+role "uclalib_role_samvera_capdeploy",
+      git: "git@github.com:UCLALibrary/uclalib_role_samvera_capdeploy"
 
 # more roles can be added here, you can pull them from GitHub or from Ansible Galaxy
 # docs here: https://github.com/bcoe/librarian-ansible

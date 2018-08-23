@@ -1,2 +1,46 @@
 ---
+project_name: californica
+env_name: test
+tomcat_applications:
+  - app_name: fedora
+    shut_port: 8008
+    conn_port: 8081
+    rproxy_path: fcrepo
 
+rails_host_fqdn: "localhost"
+
+rails_db_adapter: "mysql2"
+rails_db_pool: "5"
+rails_db_host: "localhost"
+rails_db_name: "californica"
+rails_db_user: "californica"
+rails_db_pass: "californica"
+
+project_default_admin_password: "password"
+
+contact_email_addr: "hpottinger@library.ucla.edu"
+
+fedora_repo_url: "http://localhost/fcrepo/rest"
+fedora_repo_user: "adminuser"
+fedora_repo_password: "password"
+
+solr_fqdn: localhost
+solr_cores:
+  - ident: californica
+    type: hyrax
+
+solr_index_url: "http://localhost/solr/californica"
+
+redis_host: "localhost"
+redis_port: "6379"
+
+sidekiq_num_threads: "5"
+
+git_repo_url: "https://github.com/uclalibrary/californica"
+
+git_repo_branch: "master"
+
+ssh_pub_keys:
+  - https://github.com/hardyoyo.keys
+
+oracle_java_version: "1.8.0_181"

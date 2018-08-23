@@ -1,0 +1,12 @@
+---
+
+mysql_databases:
+  - name: californica
+    collation: utf8_bin
+    encoding: utf8
+
+mysql_users:
+  - name: californica
+    host: localhost
+    password: californica
+    priv: californica.*:ALL

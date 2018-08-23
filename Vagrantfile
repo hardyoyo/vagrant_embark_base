@@ -46,10 +46,10 @@ Vagrant.configure("2") do |config|
 
     # Check if a test SSH connection to GitHub succeeds or fails (on every vagrant up)
     #
-    config.vm.provision :shell, :name => "root: testing SSH connection to GitHub on VM", :inline => "echo 'root: Testing SSH connection to GitHub on VM...' && ssh -T -q -oStrictHostKeyChecking=no git@github.com", run: "always"
+    config.vm.provision :shell, :name => "root: testing SSH connection to GitHub on VM", :inline => "echo 'root: Testing SSH connection to GitHub on VM...' && ssh -T -q -oStrictHostKeyChecking=no git@github.com || true", run: "always"
 
     # that was for root, do it again for vagrant
-    config.vm.provision :shell, :name => "vagrant: testing SSH connection to GitHub on VM", :inline => "echo 'vagrant: Testing SSH connection to GitHub on VM...' && sudo -u vagrant ssh -T -q -oStrictHostKeyChecking=no git@github.com", run: "always"
+    config.vm.provision :shell, :name => "vagrant: testing SSH connection to GitHub on VM", :inline => "echo 'vagrant: Testing SSH connection to GitHub on VM...' && sudo -u vagrant ssh -T -q -oStrictHostKeyChecking=no git@github.com || true", run: "always"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -70,6 +70,38 @@ Vagrant.configure("2") do |config|
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
   # config.vm.network "private_network", ip: "192.168.33.10"
+  # configure a private network and set this guest's IP to 192.168.50.2
+
+# BEGIN Landrush (https://github.com/phinze/landrush) configuration
+# This section will only be triggered if you have installed "landrush"
+#     vagrant plugin install landrush
+  if Vagrant.has_plugin?('landrush')
+     config.landrush.enable
+     config.landrush.tld = 'vagrant.test'
+
+     # let's use the Google free DNS
+     config.landrush.upstream '8.8.8.8'
+     config.landrush.guest_redirect_dns = false
+  end
+# END Landrush configuration
+
+# BEGIN Vagrant-Cachier (https://github.com/fgrehm/vagrant-cachier) configuration
+ # This section will only be triggered if you have installed "vagrant-cachier"
+ #     vagrant plugin install vagrant-cachier
+ if Vagrant.has_plugin?('vagrant-cachier')
+   # Use a vagrant-cachier cache if one is detected
+   config.cache.auto_detect = true
+
+   # set vagrant-cachier scope to :box, so other projects that share the
+   # vagrant box will be able to used the same cached files
+   config.cache.scope = :box
+
+   # and lets specifically use the yum cache (note, this is a RH-ism)
+   config.cache.enable :yum
+
+ end
+ # END Vagrant-Cachier configuration
+
 
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
@@ -130,14 +162,14 @@ Vagrant.configure("2") do |config|
     # now run the install for Ansible Librarian
     config.vm.provision :shell, :name => "running ansible-librarian-install.sh", :path => "ansible-librarian-install.sh"
 
-    # # provision with ansible_local
-    # config.vm.provision "ansible_local" do |ansible|
-    #   ansible.playbook          = "playbook.yml"
-    #   ansible.verbose           = true
-    #   ansible.limit             = "local" #Yeah, don't do prod just yet, OK? Thanks!
-    #   ansible.provisioning_path = "/vagrant/ansible"
-    #   ansible.inventory_path    = "/vagrant/ansible/inventory"
-    # end
+    # provision with ansible_local
+    config.vm.provision "ansible_local" do |ansible|
+      ansible.playbook          = "playbook.yml"
+      ansible.verbose           = "vvv"
+      ansible.limit             = "local" #Yeah, don't do prod just yet, OK? Thanks!
+      ansible.provisioning_path = "/vagrant/ansible"
+      ansible.inventory_path    = "/vagrant/ansible/inventory"
+    end
 
 
     # Load any local customizations from the "local-bootstrap.sh" script (if it exists)
@@ -148,7 +180,7 @@ Vagrant.configure("2") do |config|
 
 
     # housekeeping
-    config.vm.hostname = "embark"
+    config.vm.hostname = "embark.vagrant.test"
     config.vm.network :private_network, ip: "192.168.33.33"
 
     # Set the name of the VM. See: http://stackoverflow.com/a/17864388/100134
@@ -163,6 +195,6 @@ Vagrant.configure("2") do |config|
     end
 
     # Message to display to user after 'vagrant up' completes
-    config.vm.post_up_message = "Setup of 'vagrant-ansible-embark' is now COMPLETE!\nYou can SSH into the new VM via 'vagrant ssh'"
+    config.vm.post_up_message = "Setup of 'vagrant-embark' is now COMPLETE!\nYou can SSH into the new VM via 'vagrant ssh'"
 
 end
