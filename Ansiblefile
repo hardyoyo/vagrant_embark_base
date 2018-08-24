@@ -1,11 +1,17 @@
 #!/usr/bin/env ruby
 #^syntax detection
 
+role "uclalib_role_rhel7repos",
+      git: "git@github.com:UCLALibrary/uclalib_role_rhel7repos"
+
+role "uclalib_role_uclalibrepo",
+      git: "git@github.com:UCLALibrary/uclalib_role_uclalibrepo"
+
 role "ansible-packages",
       git: "git@github.com:archf/ansible-packages.git"
 
 role "uclalib_role_mysql",
-      git: "git@github.com:hardyoyo/uclalib_role_mysql", ref: "origin/use-relative-path-for-include-vars"
+      git: "git@github.com:hardyoyo/uclalib_role_mysql", ref: "origin/make-include-of-vars-file-optional"
 
 role "uclalib_role_epel",
       git: "git@github.com:UCLALibrary/uclalib_role_epel"
@@ -59,7 +65,7 @@ role "uclalib_role_tomcat",
       git: "git@github.com:UCLALibrary/uclalib_role_tomcat"
 
 role "uclalib_role_fedora4",
-      git: "git@github.com:hardyoyo/uclalib_role_fedora4", ref: "origin/use-relative-path-for-include-vars"
+      git: "git@github.com:hardyoyo/uclalib_role_fedora4", ref: "origin/make-include-of-vars-file-optional"
 
 role "uclalib_role_clamav",
       git: "git@github.com:UCLALibrary/uclalib_role_clamav"

@@ -1,5 +1,5 @@
 # this playbook borrows freely from these playbooks:
-# https://docs.library.ucla.edu/display/LIT/Samvera+Ansible+Plays
+# https://docs.library.ucla.edu/display/LIT/Samvera+Hyrax+Ansible+Plays
 
 # and this example vars file:
 # https://github.com/UCLALibrary/uclalib_role_samvera_capdeploy/blob/master/vars/exampleproj_test.yml
@@ -15,6 +15,7 @@
   become_method: sudo
   hosts: all
   roles:
+    - { role: uclalib_role_rhel7repos }
     - { role: ansible-packages }
     - { role: uclalib_role_epel }
     - { role: uclalib_role_mysql, mysql_install_version: '5.6' }
