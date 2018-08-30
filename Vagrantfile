@@ -181,7 +181,7 @@ Vagrant.configure("2") do |config|
 
     # housekeeping
     config.vm.hostname = "embark.vagrant.test"
-    config.vm.network :private_network, ip: "192.168.33.33"
+    config.vm.network "private_network", ip: "192.168.33.33", auto_config: false
 
     # Set the name of the VM. See: http://stackoverflow.com/a/17864388/100134
     config.vm.define :embark do |embark|

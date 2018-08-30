@@ -11,7 +11,7 @@ role "ansible-packages",
       git: "git@github.com:archf/ansible-packages.git"
 
 role "uclalib_role_mysql",
-      git: "git@github.com:hardyoyo/uclalib_role_mysql", ref: "origin/make-include-of-vars-file-optional"
+      git: "git@github.com:UCLALibrary/uclalib_role_mysql"
 
 role "uclalib_role_epel",
       git: "git@github.com:UCLALibrary/uclalib_role_epel"
@@ -19,8 +19,9 @@ role "uclalib_role_epel",
 role "uclalib_role_samvera_basepackages",
       git: "git@github.com:UCLALibrary/uclalib_role_samvera_basepackages"
 
-role "uclalib_role_java",
-      git: "git@github.com:UCLALibrary/uclalib_role_java"
+# use the geerlingguy java role from Ansible Galaxy
+role "geerlingguy.java",
+      git: "git@github.com:geerlingguy/ansible-role-java"
 
 role "uclalib_role_clamav",
       git: "git@github.com:UCLALibrary/uclalib_role_clamav"
@@ -34,8 +35,13 @@ role "uclalib_role_imagemagick",
 role "uclalib_role_libreoffice",
       git: "git@github.com:UCLALibrary/uclalib_role_libreoffice"
 
-role "uclalib_role_ffmpeg",
-      git: "git@github.com:UCLALibrary/uclalib_role_ffmpeg"
+#role "uclalib_role_ffmpeg",
+#      git: "git@github.com:UCLALibrary/uclalib_role_ffmpeg"
+
+# use the brentwg multimedia role for ffmpeg for now, until johnvansickle.com
+# renews their certificate
+role "brentwg.multimedia",
+     git: "git@github.com:brentwg/ansible-role-multimedia.git"
 
 role "uclalib_role_fits",
       git: "git@github.com:UCLALibrary/uclalib_role_fits"
@@ -62,10 +68,10 @@ role "uclalib_role_solr7",
       git: "git@github.com:UCLALibrary/uclalib_role_solr7"
 
 role "uclalib_role_tomcat",
-      git: "git@github.com:UCLALibrary/uclalib_role_tomcat"
+      git: "git@github.com:hardyoyo/uclalib_role_tomcat", ref: "origin/prefer-ipv4"
 
 role "uclalib_role_fedora4",
-      git: "git@github.com:hardyoyo/uclalib_role_fedora4", ref: "origin/make-include-of-vars-file-optional"
+      git: "git@github.com:UCLALibrary/uclalib_role_fedora4"
 
 role "uclalib_role_clamav",
       git: "git@github.com:UCLALibrary/uclalib_role_clamav"

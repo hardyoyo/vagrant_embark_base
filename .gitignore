@@ -9,3 +9,4 @@ imagemagick_sources
 .vagrant/*
 config/local-bootstrap.sh
 ^config/local-bootstrap.sh.example
+files/*

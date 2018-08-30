@@ -7,40 +7,61 @@ tomcat_applications:
     conn_port: 8081
     rproxy_path: fcrepo
 
-rails_host_fqdn: "localhost"
+rails_host_fqdn: "localhost6"
 
 rails_db_adapter: "mysql2"
 rails_db_pool: "5"
-rails_db_host: "localhost"
+rails_db_host: "localhost6"
 rails_db_name: "californica"
 rails_db_user: "californica"
 rails_db_pass: "californica"
+
+mysql_databases:
+  - name: californica
+    collation: utf8_bin
+    encoding: utf8
+    state: present
+
+mysql_users:
+  - name: californica
+    host: localhost6
+    password: californica
+    priv: californica.*:ALL
+    state: present
 
 project_default_admin_password: "password"
 
 contact_email_addr: "hpottinger@library.ucla.edu"
 
-fedora_repo_url: "http://localhost/fcrepo/rest"
+libreoffice_download_url: "file:///vagrant/files/LibreOffice_6.0.6_Linux_x86-64_rpm.tar.gz"
+fits_download_url: "file:///vagrant/files/fits-1.3.0.zip"
+
+fedora_url: "file:///vagrant/files/fcrepo-webapp-4.7.5.war"
+fedora_repo_url: "http://localhost6/fcrepo/rest"
 fedora_repo_user: "adminuser"
 fedora_repo_password: "password"
 
-solr_fqdn: localhost
+solr_url: "file:///vagrant/files/solr-7.4.0.tgz"
+solr_fqdn: localhost6
 solr_cores:
   - ident: californica
     type: hyrax
 
-solr_index_url: "http://localhost/solr/californica"
+solr_index_url: "http://localhost6/solr/californica"
 
-redis_host: "localhost"
+redis_host: "localhost6"
 redis_port: "6379"
 
 sidekiq_num_threads: "5"
 
 git_repo_url: "https://github.com/uclalibrary/californica"
 
-git_repo_branch: "master"
+git_repo_branch: "deploy-to-ucla"
 
 ssh_pub_keys:
   - https://github.com/hardyoyo.keys
+
+java_packages:
+        - java-1.8.0-openjdk-devel.x86_64
 
 oracle_java_version: "1.8.0_181"
