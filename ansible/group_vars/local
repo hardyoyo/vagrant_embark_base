@@ -15,14 +15,14 @@ solr_url: "file:///vagrant/files/solr-7.4.0.tgz"
 ffmpeg_download_url: "file:///vagrant/files/ffmpeg-release-64bit-static.tar.xz"
 
 
-rails_host_fqdn: "ebmark.vagrant.dev"
+rails_host_fqdn: "ebmark.vagrant.test"
 
 rails_db_adapter: "mysql2"
 rails_db_pool: "5"
 rails_db_host: "localhost"
-rails_db_name: "californica"
-rails_db_user: "californica"
-rails_db_pass: "californica"
+rails_db_name: "califdb"
+rails_db_user: "califuser"
+rails_db_pass: "first_Secret_password2"
 
 mysql_databases:
   - name: fedoradb
@@ -49,6 +49,11 @@ project_default_admin_password: "password"
 
 contact_email_addr: "hpottinger@library.ucla.edu"
 
+fedora_db_user: fedorauser
+fedora_db_password: first_Secret_password1
+fedora_db_host: localhost
+fedora_db_port: 3306
+fedora_db_name: fedoradb
 fedora_repo_url: "http://localhost:8081/fcrepo/rest"
 fedora_repo_user: "fedoraAdmin"
 fedora_repo_password: "password"
@@ -72,6 +77,8 @@ git_repo_branch: "master"
 
 ssh_pub_keys:
   - https://github.com/hardyoyo.keys
+  - https://github.com/sgurnick.keys
+  - https://github.com/ksclarke.keys
 
 java_packages:
         - java-1.8.0-openjdk-devel.x86_64

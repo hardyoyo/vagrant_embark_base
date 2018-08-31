@@ -41,4 +41,5 @@ fi
 if [ -f /vagrant/files/apache-tomcat-7.0.67.tar.gz ]; then
   echo 'Copying Tomcat to role download location...'
   cp /vagrant/files/apache-tomcat-7.0.67.tar.gz /usr/local/apache-tomcat-7.0.67.tar.gz
+fi
 exit 0
