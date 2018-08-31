@@ -22,8 +22,9 @@ Vagrant.configure("2") do |config|
   config.ssh.insert_key = false
 
 
-    # Turn off annoying console bells/beeps in Ubuntu (only if not already turned off in /etc/inputrc)
-    config.vm.provision :shell, :name => "disable console beep", :inline => "echo 'Turning off console beeps...' && grep '^set bell-style none' /etc/inputrc || echo 'set bell-style none' >> /etc/inputrc"
+    # Download all the installers we'll need
+    config.vm.provision :shell, :name => "download_installers", :inline => "echo 'Downloading installers...'"
+    config.vm.provision :shell, :name => "running download-installers.sh", :path => "download-installers.sh"
 
     #------------------------
     # Enable SSH Forwarding

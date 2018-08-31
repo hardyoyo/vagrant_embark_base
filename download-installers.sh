@@ -25,4 +25,20 @@ if [ ! -f /vagrant/files/solr-7.4.0.tgz ]; then
   wget -O /vagrant/files/solr-7.4.0.tgz "https://archive.apache.org/dist/lucene/solr/7.4.0/solr-7.4.0.tgz"
 fi
 
+# Get FFmpeg if it doesn't already exist
+if [ ! -f /vagrant/files/ffmpeg-release-64bit-static.tar.xz ]; then
+  echo 'Downloading FFmpeg...'
+  wget -O /vagrant/files/ffmpeg-release-64bit-static.tar.xz "https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz"
+fi
+
+# Get Tomcat if it doesn't already exist
+if [ ! -f /vagrant/files/apache-tomcat-7.0.67.tar.gz ]; then
+  echo 'Downloading Tomcat...'
+  wget -O /vagrant/files/apache-tomcat-7.0.67.tar.gz "http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.67/bin/apache-tomcat-7.0.67.tar.gz"
+fi
+
+# Copy Tomcat to the location where the role looks for it
+if [ -f /vagrant/files/apache-tomcat-7.0.67.tar.gz ]; then
+  echo 'Copying Tomcat to role download location...'
+  cp /vagrant/files/apache-tomcat-7.0.67.tar.gz /usr/local/apache-tomcat-7.0.67.tar.gz
 exit 0

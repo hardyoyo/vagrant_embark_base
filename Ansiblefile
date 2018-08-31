@@ -35,14 +35,6 @@ role "uclalib_role_imagemagick",
 role "uclalib_role_libreoffice",
       git: "git@github.com:UCLALibrary/uclalib_role_libreoffice"
 
-#role "uclalib_role_ffmpeg",
-#      git: "git@github.com:UCLALibrary/uclalib_role_ffmpeg"
-
-# use the brentwg multimedia role for ffmpeg for now, until johnvansickle.com
-# renews their certificate
-role "brentwg.multimedia",
-     git: "git@github.com:brentwg/ansible-role-multimedia.git"
-
 role "uclalib_role_fits",
       git: "git@github.com:UCLALibrary/uclalib_role_fits"
 
