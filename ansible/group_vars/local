@@ -22,7 +22,7 @@ rails_db_pool: "5"
 rails_db_host: "localhost"
 rails_db_name: "califdb"
 rails_db_user: "califuser"
-rails_db_pass: "first_Secret_password2"
+rails_db_pass: "second_Secret_password2"
 
 mysql_databases:
   - name: fedoradb
