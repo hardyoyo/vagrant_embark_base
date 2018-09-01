@@ -73,6 +73,9 @@ Vagrant.configure("2") do |config|
   # config.vm.network "private_network", ip: "192.168.33.10"
   # configure a private network and set this guest's IP to 192.168.50.2
 
+  config.vm.hostname = "embark.vagrant.test"
+  config.vm.network "private_network", ip: "192.168.33.33"
+
 # BEGIN Landrush (https://github.com/phinze/landrush) configuration
 # This section will only be triggered if you have installed "landrush"
 #     vagrant plugin install landrush
@@ -178,11 +181,6 @@ Vagrant.configure("2") do |config|
     if File.exists?("config/local-bootstrap.sh")
         config.vm.provision :shell, :inline => "echo '   > > > running config/local_bootstrap.sh (as vagrant)' && sudo -i -u vagrant /vagrant/config/local-bootstrap.sh"
     end
-
-
-    # housekeeping
-    config.vm.hostname = "embark.vagrant.test"
-    config.vm.network "private_network", ip: "192.168.33.33", auto_config: false
 
     # Set the name of the VM. See: http://stackoverflow.com/a/17864388/100134
     config.vm.define :embark do |embark|
