@@ -10,3 +10,4 @@ imagemagick_sources
 config/local-bootstrap.sh
 ^config/local-bootstrap.sh.example
 files/*
+.env

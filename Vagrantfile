@@ -12,11 +12,22 @@ Vagrant.configure("2") do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
-  #config.vm.box = "ubuntu/xenial64"
+  # config.vm.box = "geerlingguy/centos7" confirmed working as of 9/3/2018
 
-  # use my Samvera-Basebox
-#  config.vm.box = "hardyoyo/Samvera-Basebox"
-  config.vm.box = "geerlingguy/centos7"
+  if Vagrant.has_plugin?('vagrant-env')
+    config.env.enable # enable the .env plugin
+  end
+
+  # the vagrant-registration plugin does not seem to actually attach a subscription, but still unattaches on halt
+  # so we'll keep it around, even though it doesn't really work
+  config.vm.box = "sgurnick/rhel7" # NOTE: requires a valid RHEL developer subscription
+  if Vagrant.has_plugin?('vagrant-registration')
+    config.registration.username = "ENV['RHN_USERNAME']"
+    config.registration.password = "ENV['RHN_PASSWORD']"
+  end
+
+  # and now we *really* register and attach our RHN subscription
+  config.vm.provision :shell, :name => "attach RHN subscription", :inline => "source /vagrant/.env && subscription-manager register --auto-attach --username=$RHN_USERNAME --password=$RHN_PASSWORD"
 
   #skip the inserting of a key, because it's problematic and not needed
   config.ssh.insert_key = false
