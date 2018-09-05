@@ -20,7 +20,7 @@ Vagrant.configure("2") do |config|
 
   # If our .env file contains a key for VM_BOX, use it, otherwise use geerlingguy's centos7 box
   if ENV.has_key? 'VM_BOX'
-    config.vm.box = "ENV['VM_BOX']"
+    config.vm.box = ENV['VM_BOX']
   else
     config.vm.box = "geerlingguy/centos7"
   end
