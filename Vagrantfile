@@ -18,50 +18,54 @@ Vagrant.configure("2") do |config|
     config.env.enable # enable the .env plugin
   end
 
-  # the vagrant-registration plugin does not seem to actually attach a subscription, but still unattaches on halt
-  # so we'll keep it around, even though it doesn't really work
-  config.vm.box = "samdoran/rhel7" # NOTE: requires a valid RHEL developer subscription
-  if Vagrant.has_plugin?('vagrant-registration')
-    config.registration.username = "ENV['RHN_USERNAME']"
-    config.registration.password = "ENV['RHN_PASSWORD']"
+  # If our .env file contains a key for VM_BOX, use it, otherwise use geerlingguy's centos7 box
+  if ENV.has_key? 'VM_BOX'
+    config.vm.box = "ENV['VM_BOX']"
+  else
+    config.vm.box = "geerlingguy/centos7"
   end
 
-  # and now we *really* register and attach our RHN subscription
-  config.vm.provision :shell, :name => "attach RHN subscription", :inline => "source /vagrant/.env && subscription-manager register --auto-attach --username=$RHN_USERNAME --password=$RHN_PASSWORD"
+  # the vagrant-registration plugin does not seem to actually attach a subscription, but still unattaches on halt
+  if ENV.has_key? 'RHN_USERNAME'
+    config.registration.username = "ENV['RHN_USERNAME']"
+    config.registration.password = "ENV['RHN_PASSWORD']"
+
+    # and now we *really* register and attach our RHN subscription
+    config.vm.provision :shell, :name => "attach RHN subscription", :inline => "source /vagrant/.env && subscription-manager register --auto-attach --username=$RHN_USERNAME --password=$RHN_PASSWORD"
+  end
 
   #skip the inserting of a key, because it's problematic and not needed
   config.ssh.insert_key = false
 
+  # Download all the installers we'll need
+  config.vm.provision :shell, :name => "download_installers", :inline => "echo 'Downloading installers...'"
+  config.vm.provision :shell, :name => "running download-installers.sh", :path => "download-installers.sh"
 
-    # Download all the installers we'll need
-    config.vm.provision :shell, :name => "download_installers", :inline => "echo 'Downloading installers...'"
-    config.vm.provision :shell, :name => "running download-installers.sh", :path => "download-installers.sh"
+  #------------------------
+  # Enable SSH Forwarding
+  #------------------------
+  # Turn on SSH forwarding (so that 'vagrant ssh' has access to your local SSH keys, and you can use your local SSH keys to access GitHub, etc.)
+  config.ssh.forward_agent = true
 
-    #------------------------
-    # Enable SSH Forwarding
-    #------------------------
-    # Turn on SSH forwarding (so that 'vagrant ssh' has access to your local SSH keys, and you can use your local SSH keys to access GitHub, etc.)
-    config.ssh.forward_agent = true
+  # Prevent annoying "stdin: is not a tty" errors from displaying during 'vagrant up'
+  # See also https://github.com/mitchellh/vagrant/issues/1673#issuecomment-28288042
+  config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
 
-    # Prevent annoying "stdin: is not a tty" errors from displaying during 'vagrant up'
-    # See also https://github.com/mitchellh/vagrant/issues/1673#issuecomment-28288042
-    config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
+  # Create a '/etc/sudoers.d/root_ssh_agent' file which ensures sudo keeps any SSH_AUTH_SOCK settings
+  # This allows sudo commands (like "sudo ssh git@github.com") to have access to local SSH keys (via SSH Forwarding)
+  # See: https://github.com/mitchellh/vagrant/issues/1303
+  config.vm.provision :shell do |shell|
+      shell.inline = "touch $1 && chmod 0440 $1 && echo $2 > $1"
+      shell.args = %q{/etc/sudoers.d/root_ssh_agent "Defaults    env_keep += \"SSH_AUTH_SOCK\""}
+      shell.name = "creating /etc/sudores.d/root_ssh_agent"
+  end
 
-    # Create a '/etc/sudoers.d/root_ssh_agent' file which ensures sudo keeps any SSH_AUTH_SOCK settings
-    # This allows sudo commands (like "sudo ssh git@github.com") to have access to local SSH keys (via SSH Forwarding)
-    # See: https://github.com/mitchellh/vagrant/issues/1303
-    config.vm.provision :shell do |shell|
-        shell.inline = "touch $1 && chmod 0440 $1 && echo $2 > $1"
-        shell.args = %q{/etc/sudoers.d/root_ssh_agent "Defaults    env_keep += \"SSH_AUTH_SOCK\""}
-        shell.name = "creating /etc/sudores.d/root_ssh_agent"
-    end
+  # Check if a test SSH connection to GitHub succeeds or fails (on every vagrant up)
+  #
+  config.vm.provision :shell, :name => "root: testing SSH connection to GitHub on VM", :inline => "echo 'root: Testing SSH connection to GitHub on VM...' && ssh -T -q -oStrictHostKeyChecking=no git@github.com || true", run: "always"
 
-    # Check if a test SSH connection to GitHub succeeds or fails (on every vagrant up)
-    #
-    config.vm.provision :shell, :name => "root: testing SSH connection to GitHub on VM", :inline => "echo 'root: Testing SSH connection to GitHub on VM...' && ssh -T -q -oStrictHostKeyChecking=no git@github.com || true", run: "always"
-
-    # that was for root, do it again for vagrant
-    config.vm.provision :shell, :name => "vagrant: testing SSH connection to GitHub on VM", :inline => "echo 'vagrant: Testing SSH connection to GitHub on VM...' && sudo -u vagrant ssh -T -q -oStrictHostKeyChecking=no git@github.com || true", run: "always"
+  # that was for root, do it again for vagrant
+  config.vm.provision :shell, :name => "vagrant: testing SSH connection to GitHub on VM", :inline => "echo 'vagrant: Testing SSH connection to GitHub on VM...' && sudo -u vagrant ssh -T -q -oStrictHostKeyChecking=no git@github.com || true", run: "always"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
