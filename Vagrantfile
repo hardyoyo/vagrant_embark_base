@@ -20,7 +20,7 @@ Vagrant.configure("2") do |config|
 
   # the vagrant-registration plugin does not seem to actually attach a subscription, but still unattaches on halt
   # so we'll keep it around, even though it doesn't really work
-  config.vm.box = "sgurnick/rhel7" # NOTE: requires a valid RHEL developer subscription
+  config.vm.box = "samdoran/rhel7" # NOTE: requires a valid RHEL developer subscription
   if Vagrant.has_plugin?('vagrant-registration')
     config.registration.username = "ENV['RHN_USERNAME']"
     config.registration.password = "ENV['RHN_PASSWORD']"

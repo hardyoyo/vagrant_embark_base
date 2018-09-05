@@ -39,7 +39,7 @@ fi
 
 # Copy Tomcat to the location where the role looks for it
 if [ -f /vagrant/files/apache-tomcat-7.0.67.tar.gz ]; then
-  echo 'Copying Tomcat to role download location...'
-  cp /vagrant/files/apache-tomcat-7.0.67.tar.gz /usr/local/apache-tomcat-7.0.67.tar.gz
+  echo 'symlinking Tomcat to role download location...'
+  ln -s /vagrant/files/apache-tomcat-7.0.67.tar.gz /usr/local/apache-tomcat-7.0.67.tar.gz
 fi
 exit 0
