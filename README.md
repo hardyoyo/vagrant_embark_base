@@ -58,11 +58,6 @@ I've borrowed freely from the following projects:
 * [Double-p/smtf-test](https://github.com/double-p/smtf-test) (inspiration for the Ansible Local provisioner layout)
 * [Geerlingguy's Ansible-Vagrant Examples](https://github.com/geerlingguy/ansible-vagrant-examples)
 
-## NOTE: the UCLALibrary/uclalib_role_tomcat role is not used for this project
-
-This project does not utilize the UCLALibrary/uclalib_role_tomcat role, because it seems to prefer to bind to IPv6 network interfaces, in a Vagrant environment. This seems true across various base machine images. Until the problem is resolved, this project will use prefer_ipv4 branch on my fork of this role (hardyoyo/uclalib_role_tomcat).
-
-
 ## License
 
 [MIT](https://github.com/hardyoyo/vagrant-ansible-hyrax/blob/master/LICENSE)

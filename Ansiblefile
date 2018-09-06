@@ -62,12 +62,11 @@ role "uclalib_role_redis",
 role "uclalib_role_solr7",
       git: "git@github.com:UCLALibrary/uclalib_role_solr7"
 
-role "uclalib_role_tomcat",
-      git: "git@github.com:hardyoyo/uclalib_role_tomcat", ref: "origin/prefer-ipv4"
-
-# do not use this role right now, it seems to bind to the wrong interface
 # role "uclalib_role_tomcat",
-#      git: "git@github.com:UCLALibrary/uclalib_role_tomcat"
+#       git: "git@github.com:hardyoyo/uclalib_role_tomcat", ref: "origin/prefer-ipv4"
+
+role "uclalib_role_tomcat",
+     git: "git@github.com:UCLALibrary/uclalib_role_tomcat"
 
 role "uclalib_role_fedora4",
       git: "git@github.com:UCLALibrary/uclalib_role_fedora4"
