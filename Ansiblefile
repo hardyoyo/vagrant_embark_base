@@ -19,9 +19,12 @@ role "uclalib_role_epel",
 role "uclalib_role_samvera_basepackages",
       git: "git@github.com:UCLALibrary/uclalib_role_samvera_basepackages"
 
-# use the geerlingguy java role from Ansible Galaxy
-role "geerlingguy.java",
-      git: "git@github.com:geerlingguy/ansible-role-java"
+role "uclalib_role_java",
+      git: "git@github.com:UCLALibrary/uclalib_role_java"
+
+# # use the geerlingguy java role from Ansible Galaxy
+# role "geerlingguy.java",
+#       git: "git@github.com:geerlingguy/ansible-role-java"
 
 role "uclalib_role_clamav",
       git: "git@github.com:UCLALibrary/uclalib_role_clamav"
