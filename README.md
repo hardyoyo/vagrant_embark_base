@@ -21,7 +21,7 @@ No, this project uses the [Ansible Local Provisioner](https://www.vagrantup.com/
 
 ## How to use
 
-Ensure you have the Vagrant-ENV plugin installed (see below), clone this repository, cd to the root of it, then copy the `.env.sample` file to a new file called `.env`, and modify it to suit your requirements. You may select either a CentOS base box, or you can use a RHEL base box. If you opt for a RHEL base box, you will also need to provide your RHN credentials in your `.env` file. The box will not provision correctly without these credentials. For CentOS, no RHN credentials are required, and should not be provided.
+Ensure you have the Vagrant-ENV plugin installed (see below, there are other plugin recommendations), clone this repository, cd to the root of it, then copy the `.env.sample` file to a new file called `.env`, and modify it to suit your requirements. You may select either a CentOS base box, or you can use a RHEL base box. If you opt for a RHEL base box, you will also need to provide your RHN credentials in your `.env` file. The box will not provision correctly without these credentials. For CentOS, no RHN credentials are required, and should not be provided.
 
 After preparing your .env file, standard Vagrant protocol applies: be sure you're in the top level folder of this project, and run
 
@@ -33,7 +33,11 @@ vagrant up
 
 Vagrant has a robust community of plugin developers, and some of the plugins are quite nice. [Installing a Vagrant plugin](https://www.vagrantup.com/docs/plugins/usage.html) is simple.
 
-The [Vagrant-ENV](https://github.com/gosuri/vagrant-env) Vagrant plugin is *required*, in order to use this project.
+* [Vagrant-ENV](https://github.com/gosuri/vagrant-env) is *required*, in order to use this project.
+* [Vagrant-registration](https://github.com/projectatomic/adb-vagrant-registration) is *strongly recommended*,
+  if you elect to use a RedHat base VM image. It does not successfully register your VM with RHN, we use a
+  shell script to handle the actual registration, however, it does still work to unregister your VM when you
+  halt or destroy it, which is a nice convenience, and worth installing the plugin.
 
 The following Vagrant plugins are not required, but they do make using Vagrant more enjoyable.
 
@@ -53,6 +57,10 @@ I've borrowed freely from the following projects:
 * [Vagrant-DSpace](http://github.com/dspace/vagrant-dspace) (a bunch of shell provisioners)
 * [Double-p/smtf-test](https://github.com/double-p/smtf-test) (inspiration for the Ansible Local provisioner layout)
 * [Geerlingguy's Ansible-Vagrant Examples](https://github.com/geerlingguy/ansible-vagrant-examples)
+
+## NOTE: the UCLALibrary/uclalib_role_tomcat role is not used for this project
+
+This project does not utilize the UCLALibrary/uclalib_role_tomcat role, because it seems to prefer to bind to IPv6 network interfaces, in a Vagrant environment. This seems true across various base machine images. Until the problem is resolved, this project will use prefer_ipv4 branch on my fork of this role (hardyoyo/uclalib_role_tomcat).
 
 
 ## License
