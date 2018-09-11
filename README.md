@@ -29,9 +29,23 @@ After preparing your .env file, standard Vagrant protocol applies: be sure you'r
 vagrant up
 ```
 
+### Great, where are the services?
+
+All services provisioned on this VM are bound to a routable interface, so you can access them at the private IP address assigned as Vagrant boots up the VM. Unless you change it, it's `192.168.33.33`. If you have any of Vagrant's [local domain resolution plugins](https://github.com/hashicorp/vagrant/wiki/Available-Vagrant-Plugins#local-domain-resolution) installed, you should be able to reach the local Californica app at https://embark.vagrant.test/ ... its fedora at http://embark.vagrant.test:8081/fcrepo/rest ... and its Solr at http://embark.vagrant.test:8983
+
 ## Vagrant Plugin Requirements and Recommendations
 
 Vagrant has a robust community of plugin developers, and some of the plugins are quite nice. [Installing a Vagrant plugin](https://www.vagrantup.com/docs/plugins/usage.html) is simple.
+
+> #### TLDR, just tell me what to install...
+>
+> ... OK, fine, start with this...
+>
+> `vagrant plugin install vagrant-env vagrant-registration vagrant-hostsupdater`
+>
+> ... but, you'll really have a better time if you also install these...
+>
+> `vagrant plugin install vagrant-vbguest vagrant-cachier vagrant-notify`
 
 * [Vagrant-ENV](https://github.com/gosuri/vagrant-env) is *required*, in order to use this project.
 * [Vagrant-registration](https://github.com/projectatomic/adb-vagrant-registration) is *strongly recommended*,
@@ -41,12 +55,9 @@ Vagrant has a robust community of plugin developers, and some of the plugins are
 
 The following Vagrant plugins are not required, but they do make using Vagrant more enjoyable.
 
+* [Vagrant-Hostsupdater](https://github.com/cogitatio/vagrant-hostsupdater) (or any of the [local domain resolution plugins](https://github.com/hashicorp/vagrant/wiki/Available-Vagrant-Plugins#local-domain-resolution) you might prefer)
 * [Vagrant-VBGuest](https://github.com/dotless-de/vagrant-vbguest) - *Highly Recommended for VirtualBox* as it keeps VirtualBox Guest Additions up to date
-  * `vagrant plugin install vagrant-vbguest`
 * [Vagrant-Cachier](https://github.com/fgrehm/vagrant-cachier) - Caches packages between VMs. (Project now unmaintained, see URL)
-* [Vagrant-Hostsupdater](https://github.com/cogitatio/vagrant-hostsupdater)
-* [Vagrant-Proxyconf](https://github.com/tmatilai/vagrant-proxyconf/)
-* [Vagrant-VBox-Snapshot](https://github.com/dergachev/vagrant-vbox-snapshot/)
 * [Vagrant-Notify](https://github.com/fgrehm/vagrant-notify)
 
 
