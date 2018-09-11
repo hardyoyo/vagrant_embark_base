@@ -6,6 +6,10 @@ Need more roles? Add them to the Ansiblefile. Call them in the playbook.
 
 This is totally a work in progress, use at your own risk.
 
+## What's all this about "Californica"?
+
+As proof that this environment is capable of doing something useful, out of the box it sets up an instance of the [UCLA Library](https://www.library.ucla.edu/)'s [Californica](https://github.com/UCLALibrary/californica) [Samvera/Hyrax](https://github.com/samvera/hyrax) application, including all required services. Vagrant-Embark is certainly not only a Rails development/devops environment, you can use it to test any collection of Ansible roles to stand up any sort of web application you might prefer. Think of the Californica application as a working demo.
+
 ## Requirements
 
 * [Virtualization support must be enabled](http://www.howtogeek.com/213795/how-to-enable-intel-vt-x-in-your-computers-bios-or-uefi-firmware/), if you have a BIOS-based computer (aka a PC).
