@@ -13,7 +13,7 @@ As proof that this environment is capable of doing something useful, out of the 
 ## Requirements
 
 * [Virtualization support must be enabled](http://www.howtogeek.com/213795/how-to-enable-intel-vt-x-in-your-computers-bios-or-uefi-firmware/), if you have a BIOS-based computer (aka a PC).
-* [Vagrant](http://vagrantup.com/) version 1.8.3 or above.
+* [Vagrant](http://vagrantup.com/) version 2.1.1 or above.
 * [VirtualBox](https://www.virtualbox.org/)
 * (Optional) A GitHub account with an associated SSH key. This is NOT required, but if you plan to do development with this project and/or create Pull Requests, it is recommended. If you have a local [SSH agent](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/) running (or [Pageant/PuTTY](http://www.putty.org/) on Windows, or the [OSX Keychain with a saved passphrase](https://apple.stackexchange.com/questions/48502/how-can-i-permanently-add-my-ssh-private-key-to-keychain-so-it-is-automatically)), Vagrant will attempt to automatically forward your local SSH key(s) to the VM, so that you will be able to immediately interact with GitHub via SSH on the VM. However, if you are *not* running a key agent, *even if your SSH key does not have a passphrase*, Vagrant will *not* prompt you to enter your passphrase, it will simply fail to run all the provisioning processes. We urge you to consider running a key agent with your SSH key, it will make your life so much more simple.
  * *WARNING:* If you are using an SSH key, we highly recommend that you use an RSA key.
