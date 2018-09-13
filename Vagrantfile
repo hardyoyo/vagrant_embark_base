@@ -25,6 +25,13 @@ Vagrant.configure("2") do |config|
     config.vm.box = "geerlingguy/centos7"
   end
 
+  if ENV.has_key? 'VM_BOX_VERSION'
+      config.vm.box_version = ENV['VM_BOX_VERSION']
+  else
+      config.vm.box_version = "1.2.10"
+  end
+
+
   # the vagrant-registration plugin does not seem to actually attach a subscription, but still unattaches on halt
   if ENV.has_key? 'RHN_USERNAME'
     config.registration.username = "ENV['RHN_USERNAME']"
