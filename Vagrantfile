@@ -207,8 +207,7 @@ Vagrant.configure("2") do |config|
     end
 
     # Set the name of the VM. See: http://stackoverflow.com/a/17864388/100134
-    config.vm.define :embark do |embark|
-    end
+    config.vm.define :embark do |embark| end
 
     # if we're running with vagrant-notify, send a notification that we're done, in case we've wandered off
     # https://github.com/fgrehm/vagrant-notify

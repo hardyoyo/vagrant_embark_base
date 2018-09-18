@@ -1,6 +1,6 @@
 ---
 project_name: californica
-env_name: dev
+env_name: embark
 tomcat_applications:
   - app_name: fedora
     shut_port: 8008
