@@ -11,3 +11,4 @@ config/local-bootstrap.sh
 ^config/local-bootstrap.sh.example
 files/*
 .env
+*.box

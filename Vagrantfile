@@ -184,6 +184,15 @@ Vagrant.configure("2") do |config|
         config.vm.provision :shell, :name => "creating a swap file with the default increase-swap.sh script", :path => "increase-swap.sh"
     end
 
+    if File.exists?("config/set-up-dns.sh")
+        config.vm.provision :shell, :name => "setting up DNS", :inline => "echo '   > > > running local set-up-dns.sh.'"
+        config.vm.provision :shell, :name => "setting up DNS with a local set-up-dns.sh script", :path => "config/set-up-dns.sh"
+    else
+        config.vm.provision :shell, :name => "setting up DNS", :inline => "echo '   > > > running default set-up-dns.sh.'"
+        config.vm.provision :shell, :name => "setting up DNS with the default set-up-dns.sh script", :path => "set-up-dns.sh"
+    end
+
+
     # run ansible bootstrap
     config.vm.provision :shell, :name => "running ansible-bootstrap", :path => "ansible-boostrap-centos.sh"
 
@@ -192,7 +201,7 @@ Vagrant.configure("2") do |config|
 
     # provision with ansible_local
     config.vm.provision "ansible_local" do |ansible|
-      ansible.playbook          = "playbook.yml"
+      ansible.playbook          = "basebox.yml"
       ansible.verbose           = "vvv"
       ansible.limit             = "local" #Yeah, don't do prod just yet, OK? Thanks!
       ansible.provisioning_path = "/vagrant/ansible"
