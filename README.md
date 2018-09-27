@@ -2,6 +2,10 @@
 
 A Vagrant-managed CentOS7 base box for use with the [Vagrant_Embark](https://github.com/hardyoyo/vagrant_embark) project. This base box gathers all the requirements for Vagrant-Embark, to give us a head start in provisioning an application. This is particularly helpful for Rails-based services.
 
+## Blah blah blah, where's the box?
+
+On [Vagrant Cloud](https://app.vagrantup.com/hardyoyo/boxes/embark-base), of course.
+
 ## Vagrant Plugin Requirements and Recommendations
 
 Vagrant has a robust community of plugin developers, and some of the plugins are quite nice. [Installing a Vagrant plugin](https://www.vagrantup.com/docs/plugins/usage.html) is simple.
