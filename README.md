@@ -1,41 +1,6 @@
-# Vagrant-Embark
+# Vagrant_Embark_Base
 
-A simplistic Vagrant dev environment for starting any sort of web development project that will run on CentOS or RedHat Enterprise Linux/RHEL, and do so with Ansible for provisioning. Uses [Librarian-Ansible](https://github.com/bcoe/librarian-ansible) to handle downloading Ansible roles.
-
-Need more roles? Add them to the Ansiblefile. Call them in the playbook.
-
-This is totally a work in progress, use at your own risk.
-
-## What's all this about "Californica"?
-
-As proof that this environment is capable of doing something useful, out of the box it sets up an instance of the [UCLA Library](https://www.library.ucla.edu/)'s [Californica](https://github.com/UCLALibrary/californica) [Samvera/Hyrax](https://github.com/samvera/hyrax) application, including all required services. Vagrant-Embark is certainly not only a Rails development/devops environment, you can use it to test any collection of Ansible roles to stand up any sort of web application you might prefer. Think of the Californica application as a working demo.
-
-## Requirements
-
-* [Virtualization support must be enabled](http://www.howtogeek.com/213795/how-to-enable-intel-vt-x-in-your-computers-bios-or-uefi-firmware/), if you have a BIOS-based computer (aka a PC).
-* [Vagrant](http://vagrantup.com/) version 1.9.2 or above.
-* [VirtualBox](https://www.virtualbox.org/)
-* (Optional) A GitHub account with an associated SSH key. This is NOT required, but if you plan to do development with this project and/or create Pull Requests, it is recommended. If you have a local [SSH agent](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/) running (or [Pageant/PuTTY](http://www.putty.org/) on Windows, or the [OSX Keychain with a saved passphrase](https://apple.stackexchange.com/questions/48502/how-can-i-permanently-add-my-ssh-private-key-to-keychain-so-it-is-automatically)), Vagrant will attempt to automatically forward your local SSH key(s) to the VM, so that you will be able to immediately interact with GitHub via SSH on the VM. However, if you are *not* running a key agent, *even if your SSH key does not have a passphrase*, Vagrant will *not* prompt you to enter your passphrase, it will simply fail to run all the provisioning processes. We urge you to consider running a key agent with your SSH key, it will make your life so much more simple.
- * *WARNING:* If you are using an SSH key, we highly recommend that you use an RSA key.
-
-## Do I need to install Ansible?
-
-No, this project uses the [Ansible Local Provisioner](https://www.vagrantup.com/docs/provisioning/ansible_local.html) for Vagrant. That means Ansible is installed and run from the guest VM. You only need the above-mentioned requirements.
-
-
-## How to use
-
-Ensure you have the Vagrant-ENV plugin installed (see below, there are other plugin recommendations), clone this repository, cd to the root of it, then copy the `.env.sample` file to a new file called `.env`, and modify it to suit your requirements. You may select either a CentOS base box, or you can use a RHEL base box. If you opt for a RHEL base box, you will also need to provide your RHN credentials in your `.env` file. The box will not provision correctly without these credentials. For CentOS, no RHN credentials are required, and should not be provided.
-
-After preparing your .env file, standard Vagrant protocol applies: be sure you're in the top level folder of this project, and run
-
-```
-vagrant up
-```
-
-### Great, where are the services?
-
-All services provisioned on this VM are bound to a routable interface, so you can access them at the private IP address assigned as Vagrant boots up the VM. Unless you change it, it's `192.168.33.33`. If you have any of Vagrant's [local domain resolution plugins](https://github.com/hashicorp/vagrant/wiki/Available-Vagrant-Plugins#local-domain-resolution) installed, you should be able to reach the local Californica app at https://embark.vagrant.test/ ... its fedora at http://embark.vagrant.test:8081/fcrepo/rest ... and its Solr at http://embark.vagrant.test:8983
+A Vagrant-managed CentOS7 base box for use with the [Vagrant_Embark](https://github.com/hardyoyo/vagrant_embark) project. This base box gathers all the requirements for Vagrant-Embark, to give us a head start in provisioning an application. This is particularly helpful for Rails-based services.
 
 ## Vagrant Plugin Requirements and Recommendations
 
@@ -76,4 +41,4 @@ I've borrowed freely from the following projects:
 
 ## License
 
-[MIT](https://github.com/hardyoyo/vagrant-ansible-hyrax/blob/master/LICENSE)
+[MIT](https://github.com/hardyoyo/vagrant_embark_base/blob/master/LICENSE)
